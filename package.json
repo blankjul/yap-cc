@@ -1,0 +1,36 @@
+{
+  "name": "yap",
+  "version": "1.0.0",
+  "description": "Fast, token-efficient meta prompting framework for Claude Code",
+  "bin": {
+    "yap": "bin/install.js"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "ai",
+    "automation",
+    "meta-prompting",
+    "workflow"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blankjul/yap"
+  },
+  "engines": {
+    "node": ">=16.7.0"
+  },
+  "files": [
+    "bin/",
+    "commands/",
+    "agents/",
+    "templates/",
+    ".claude/README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "prepublishOnly": "echo 'Ready to publish'"
+  }
+}

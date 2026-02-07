@@ -1,0 +1,25 @@
+# Development files
+.idea/
+.vscode/
+.DS_Store
+*.log
+
+# Documentation (keep only README.md)
+PLAN.md
+STATUS.md
+IMPLEMENTATION.md
+PROJECT.md
+REQUIREMENTS.md
+RESEARCH.md
+
+# Old structure
+zap-skill/
+.zap/
+
+# Git
+.git/
+.gitignore
+
+# Testing
+test/
+*.test.js
