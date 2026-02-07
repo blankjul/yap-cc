@@ -1,6 +1,6 @@
 {
   "name": "yap-cc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fast, token-efficient meta prompting framework for Claude Code",
   "bin": {
     "yap-cc": "bin/install.js"
