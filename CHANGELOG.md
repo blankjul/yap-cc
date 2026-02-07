@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to YAP Framework will be documented in this file.
+All notable changes to YAP will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -8,17 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-02-07
 
 ### Added
-- Initial release of YAP Framework
-- NPX-based installer (`npx yap-framework`)
-- 8 core commands:
-  - `/yap:init` - Initialize project
-  - `/yap:story` - Create new story
-  - `/yap:status` - Show progress
+- Initial release of YAP
+- NPX-based installer (`npx yap`)
+- Core commands:
+  - `/yap:start` - Smart session starter
+  - `/yap:feature` - Create new feature
   - `/yap:discuss` - Design discussion
   - `/yap:research` - Research libraries
   - `/yap:execute` - Plan and execute
   - `/yap:verify` - Verify completion
-  - `/yap:learn` - Map existing codebase
+  - `/yap:explore` - Explore existing codebase
 - 4 specialized agents:
   - Planner (Sonnet) - Task decomposition
   - Executor (Haiku→Sonnet) - Implementation with deviation rules
@@ -45,4 +44,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Troubleshooting guide
 - Comparison to get-shit-done
 
-[1.0.0]: https://github.com/yourusername/yap-framework/releases/tag/v1.0.0
+[1.0.0]: https://github.com/blankjul/yap/releases/tag/v1.0.0
