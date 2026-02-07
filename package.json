@@ -1,9 +1,9 @@
 {
-  "name": "yap",
+  "name": "yap-cc",
   "version": "1.0.0",
   "description": "Fast, token-efficient meta prompting framework for Claude Code",
   "bin": {
-    "yap": "bin/install.js"
+    "yap-cc": "bin/install.js"
   },
   "keywords": [
     "claude",
@@ -17,7 +17,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/blankjul/yap"
+    "url": "https://github.com/blankjul/yap-cc"
   },
   "engines": {
     "node": ">=16.7.0"

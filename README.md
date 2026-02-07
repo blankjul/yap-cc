@@ -21,7 +21,7 @@ Developers who want to build features efficiently with AI assistance - without t
 ## Getting Started
 
 ```bash
-npx yap
+npx yap-cc
 ```
 
 The installer prompts you to choose:
@@ -36,7 +36,7 @@ Verify with `/yap:start` inside Claude Code.
 YAP evolves fast. Update periodically:
 
 ```bash
-npx yap@latest
+npx yap-cc@latest
 ```
 
 ## Non-interactive Install
@@ -45,12 +45,12 @@ For Docker, CI, or scripts:
 
 ```bash
 # Claude Code
-npx yap --claude --global   # Install to ~/.claude/
-npx yap --claude --local    # Install to ./.claude/
+npx yap-cc --claude --global   # Install to ~/.claude/
+npx yap-cc --claude --local    # Install to ./.claude/
 
 # Short flags
-npx yap -c -g               # Same as above
-npx yap -c -l               # Same as above
+npx yap-cc -c -g               # Same as above
+npx yap-cc -c -l               # Same as above
 ```
 
 Use `--global` (`-g`) or `--local` (`-l`) to skip the location prompt.
@@ -61,7 +61,7 @@ Use `--claude` (`-c`) to skip the runtime prompt.
 Clone the repository and run the installer locally:
 
 ```bash
-git clone https://github.com/blankjul/yap.git
+git clone https://github.com/blankjul/yap-cc.git
 cd yap
 node bin/install.js --claude --local
 ```

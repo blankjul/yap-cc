@@ -52,7 +52,7 @@ if (showHelp) {
   header('⚡ YAP INSTALLER');
   log('Fast, token-efficient meta prompting for Claude Code\n', 'cyan');
   log('Usage:', 'bright');
-  log('  npx yap [options]\n');
+  log('  npx yap-cc [options]\n');
   log('Options:', 'bright');
   log('  -c, --claude         Install for Claude Code', 'blue');
   log('  --all                Install for all runtimes (future: multi-runtime)', 'blue');
@@ -60,12 +60,12 @@ if (showHelp) {
   log('  -l, --local          Install locally (./.claude/)', 'blue');
   log('  -h, --help           Show this help message\n', 'blue');
   log('Examples:', 'bright');
-  log('  npx yap                    # Interactive mode', 'dim');
-  log('  npx yap -c -g              # Claude Code, global', 'dim');
-  log('  npx yap --claude --local   # Claude Code, local', 'dim');
-  log('  npx yap@latest -g          # Update to latest\n', 'dim');
+  log('  npx yap-cc                    # Interactive mode', 'dim');
+  log('  npx yap-cc -c -g              # Claude Code, global', 'dim');
+  log('  npx yap-cc --claude --local   # Claude Code, local', 'dim');
+  log('  npx yap-cc@latest -g          # Update to latest\n', 'dim');
   log('Documentation:', 'cyan');
-  log('  https://github.com/blankjul/yap\n');
+  log('  https://github.com/blankjul/yap-cc\n');
   process.exit(0);
 }
 
@@ -217,7 +217,7 @@ async function main() {
   log('  /yap:research  - Research libraries', 'blue');
   log('  /yap:learn     - Map existing codebase', 'blue');
 
-  log('\nDocumentation: https://github.com/blankjul/yap\n', 'cyan');
+  log('\nDocumentation: https://github.com/blankjul/yap-cc\n', 'cyan');
 }
 
 function copyDirectory(source, dest) {
