@@ -1,1 +1,0 @@
-# No additional requirements — uses the browser tool (web/browser.py)
