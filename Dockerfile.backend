@@ -1,0 +1,84 @@
+# syntax=docker/dockerfile:1
+
+# ── Stage: deps ───────────────────────────────────────────────────────────────
+FROM python:3.11-slim AS deps
+
+ARG INSTALL_PLAYWRIGHT=false
+
+WORKDIR /build
+
+# Install Node.js 20 via NodeSource
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        curl \
+        ca-certificates \
+        gnupg \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y --no-install-recommends nodejs \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install claude-code CLI globally
+RUN npm install -g @anthropic-ai/claude-code
+
+# Copy Python project files and install deps
+COPY backend/pyproject.toml backend/
+COPY backend/src/ backend/src/
+RUN cd backend && pip install --no-cache-dir -e .
+
+# Optional: Playwright chromium (opt-in, adds ~300 MB).
+# Always create the target dir so the COPY in the final stage never fails.
+RUN if [ "$INSTALL_PLAYWRIGHT" = "true" ]; then \
+        python -m playwright install chromium --with-deps; \
+    fi \
+    && mkdir -p /root/.cache/ms-playwright
+
+
+# ── Stage: final ──────────────────────────────────────────────────────────────
+FROM python:3.11-slim AS final
+
+# Runtime system deps + gosu for privilege dropping in entrypoint + VNC dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        curl \
+        gosu \
+        xvfb \
+        x11vnc \
+        fluxbox \
+        git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Non-root user (entrypoint drops to this user after fixing /data ownership)
+RUN useradd -m -u 1000 yapflows
+ENV HOME=/home/yapflows
+
+# Copy installed Python packages and executables
+COPY --from=deps /usr/local/lib/python3.11 /usr/local/lib/python3.11
+COPY --from=deps /usr/local/bin /usr/local/bin
+
+# Copy Node binary and global npm modules (needed for `claude` CLI)
+COPY --from=deps /usr/bin/node /usr/bin/node
+COPY --from=deps /usr/lib/node_modules /usr/lib/node_modules
+
+# Copy Playwright browser cache (empty dir when INSTALL_PLAYWRIGHT=false)
+COPY --from=deps /root/.cache/ms-playwright /home/yapflows/.cache/ms-playwright
+
+# Install websockify and noVNC
+RUN pip install --no-cache-dir websockify && \
+    git clone --depth 1 https://github.com/novnc/noVNC.git /opt/novnc
+
+# Copy application source
+WORKDIR /app/backend
+COPY backend/ .
+
+RUN chown -R yapflows:yapflows /app /home/yapflows/.cache
+
+# Data directory (user data persisted via Docker volume)
+ENV USER_DIR=/data
+VOLUME ["/data"]
+
+# Entrypoint fixes /data ownership then drops to yapflows user
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+EXPOSE 8000 6081
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["uvicorn", "src.server:app", "--host", "0.0.0.0", "--port", "8000"]

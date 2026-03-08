@@ -1,0 +1,43 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+      args:
+        INSTALL_PLAYWRIGHT: "${INSTALL_PLAYWRIGHT:-true}"
+    restart: unless-stopped
+    environment:
+      USER_DIR: /data
+      CORS_ORIGINS: "http://localhost:3001,http://127.0.0.1:3001"
+      ENABLE_VNC: "true"
+    volumes:
+      - yapflows-data:/data
+      # claude-cli OAuth state — comment out if not using the claude-cli provider
+      - ${HOME}/.claude:/home/yapflows/.claude:ro
+    ports:
+      - "8000:8000"
+      - "6081:6081"
+    healthcheck:
+      test: ["CMD", "sh", "-c", "curl -f http://localhost:8000/health && test -f /data/venv/bin/python && test -d /data/tools"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      # Server-side Next.js → backend uses Docker-internal hostname
+      BACKEND_URL: http://backend:8000
+    ports:
+      - "3001:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  yapflows-data:

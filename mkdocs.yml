@@ -1,0 +1,68 @@
+site_name: Yapflows
+site_description: A lightweight, self-hosted personal AI assistant framework
+docs_dir: docs
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.follow
+    - content.code.copy
+    - content.code.annotate
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+nav:
+  - Get Started:
+    - Introduction: index.md
+    - Quickstart: quickstart.md
+  - Installation:
+    - Requirements: installation/requirements.md
+    - Setup: installation/setup.md
+    - Configuration: installation/configuration.md
+  - Concepts:
+    - Agents: concepts/agents.md
+    - Environments: concepts/environments.md
+    - Sessions: concepts/sessions.md
+    - Memory: concepts/memory.md
+    - Knowledge: concepts/knowledge.md
+    - Tasks: concepts/tasks.md
+    - Skills: concepts/skills.md
+    - Triggers: concepts/triggers.md
+  - Guides:
+    - Create an Agent: guides/create-agent.md
+    - Schedule a Task: guides/schedule-task.md
+    - Connect Telegram: guides/telegram.md
+    - Build a Custom Skill: guides/custom-skill.md
+  - Reference:
+    - File Formats: reference/file-formats.md
+    - Data Directory: reference/data-directory.md
+    - Keyboard Shortcuts: reference/keyboard-shortcuts.md
+    - API: reference/api.md
+  - Development:
+    - Architecture: development/architecture.md
+    - Contributing: development/contributing.md
